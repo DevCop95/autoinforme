@@ -1,0 +1,2 @@
+# autoinforme
+preparado para Alex
