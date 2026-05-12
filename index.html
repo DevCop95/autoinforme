@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Importación de Autos a México (2026)</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%230071e3%22 /></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        :root {
+            --apple-bg: #f5f5f7;
+            --apple-text: #1d1d1f;
+            --apple-text-secondary: #86868b;
+            --apple-blue: #0071e3;
+            --apple-blue-hover: #0077ed;
+            --apple-card: #ffffff;
+            --apple-border: #d2d2d7;
+            --apple-green: #34c759;
+            --apple-red: #ff3b30;
+            --apple-orange: #ff9500;
+        }
+
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background-color: var(--apple-bg); 
+            color: var(--apple-text);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .sf-heading {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            letter-spacing: -0.015em;
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 250px;
+            }
+        }
+
+        .apple-card {
+            background-color: var(--apple-card);
+            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .apple-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, #0071e3, #42a1ec);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .apple-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .apple-card:hover::before {
+            opacity: 1;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #d2d2d7; border-radius: 10px; border: 2px solid var(--apple-bg); }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #86868b; }
+
+        .glass-nav {
+            background-color: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="custom-scrollbar">
+
+    <nav class="glass-nav sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-[52px] items-center">
+                <div class="flex items-center">
+                    <span class="text-lg font-semibold sf-heading">ImportAuto <span class="text-[#86868b] font-normal">2026</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center text-xs font-normal tracking-wide text-[#1d1d1f]">
+                    <a href="#reglas" class="hover:text-[#0071e3] transition-colors">Reglas y VIN</a>
+                    <a href="#titulos" class="hover:text-[#0071e3] transition-colors">Títulos</a>
+                    <a href="#costos" class="hover:text-[#0071e3] transition-colors">Costos</a>
+                    <a href="#modelos" class="hover:text-[#0071e3] transition-colors">Modelos</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-24">
+
+        <header class="text-center max-w-4xl mx-auto mb-16 pt-8">
+            <h1 class="text-5xl md:text-6xl font-bold sf-heading text-[#1d1d1f] mb-6 leading-tight tracking-tight">Importación de Autos.<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#0071e3] to-[#42a1ec]">Simple y clara.</span></h1>
+            <p class="text-xl md:text-2xl text-[#86868b] sf-heading font-medium max-w-2xl mx-auto leading-relaxed">Conoce qué es legal, los costos reales y los modelos más buscados en México en 2026.</p>
+        </header>
+
+        <section id="reglas" class="scroll-mt-32">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold sf-heading text-[#1d1d1f] mb-4">Reglas y el código VIN.</h2>
+                <p class="text-lg text-[#86868b] max-w-3xl mx-auto">Para aplicar a aranceles preferenciales bajo el T-MEC, el vehículo debe tener 8 o 9 años y ensamble norteamericano.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center apple-card p-8 md:p-12">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6 sf-heading">Años Permitidos</h3>
+                    <div class="flex space-x-4 mb-10">
+                        <div class="bg-[#f5f5f7] rounded-2xl p-6 flex-1 text-center border border-[#d2d2d7]/50">
+                            <span class="block text-4xl font-bold text-[#1d1d1f] mb-1">2017</span>
+                            <span class="text-xs font-semibold text-[#86868b] tracking-wide uppercase">9 años de antigüedad</span>
+                        </div>
+                        <div class="bg-[#f5f5f7] rounded-2xl p-6 flex-1 text-center border border-[#d2d2d7]/50">
+                            <span class="block text-4xl font-bold text-[#1d1d1f] mb-1">2018</span>
+                            <span class="text-xs font-semibold text-[#86868b] tracking-wide uppercase">8 años de antigüedad</span>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-2xl font-semibold mb-4 sf-heading">El Primer Dígito del VIN</h3>
+                    <ul class="space-y-4 text-[17px] text-[#1d1d1f]">
+                        <li class="flex items-center"><svg class="w-6 h-6 text-[#34c759] mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> <span><strong>1, 4, 5:</strong> EE.UU. (Válido)</span></li>
+                        <li class="flex items-center"><svg class="w-6 h-6 text-[#34c759] mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> <span><strong>2:</strong> Canadá (Válido)</span></li>
+                        <li class="flex items-center"><svg class="w-6 h-6 text-[#34c759] mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> <span><strong>3:</strong> México (Válido)</span></li>
+                        <li class="flex items-center"><svg class="w-6 h-6 text-[#ff3b30] mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> <span><strong>Letras (J, K, W):</strong> Japón, Corea, Europa (Rechazado)</span></li>
+                    </ul>
+                </div>
+                <div class="mt-8 lg:mt-0">
+                    <div class="chart-container">
+                        <canvas id="vinChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="titulos" class="scroll-mt-32">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold sf-heading text-[#1d1d1f] mb-4">Títulos. Lo seguro y lo riesgoso.</h2>
+                <p class="text-lg text-[#86868b] max-w-3xl mx-auto">El documento de propiedad estadounidense dicta si tu inversión es segura o si será retenida en aduanas.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="apple-card p-6 border-t-4 border-t-[#34c759] flex flex-col h-full">
+                    <h4 class="font-semibold text-xl mb-3 text-[#1d1d1f] sf-heading">Clean Title</h4>
+                    <p class="text-[#86868b] text-[15px] leading-relaxed flex-grow">El vehículo no ha sufrido daños mayores. Pasa aduana sin problemas. Es la opción más segura y de mayor valor.</p>
+                </div>
+                <div class="apple-card p-6 border-t-4 border-t-[#ff9500] flex flex-col h-full">
+                    <h4 class="font-semibold text-xl mb-3 text-[#1d1d1f] sf-heading">Salvage (Rebuildable)</h4>
+                    <p class="text-[#86868b] text-[15px] leading-relaxed flex-grow">Permitido bajo inspección. Aduana requiere historial y facturas de reparaciones. Menor valor de reventa.</p>
+                </div>
+                <div class="apple-card p-6 border-t-4 border-t-[#ff3b30] flex flex-col h-full">
+                    <h4 class="font-semibold text-xl mb-3 text-[#1d1d1f] sf-heading">Cert. of Destruction</h4>
+                    <p class="text-[#86868b] text-[15px] leading-relaxed flex-grow"><strong>Totalmente Ilegal.</strong> Muy común en Marketplace a precios muy bajos. Nunca podrá ser importado.</p>
+                </div>
+                <div class="apple-card p-6 border-t-4 border-t-[#ff3b30] flex flex-col h-full">
+                    <h4 class="font-semibold text-xl mb-3 text-[#1d1d1f] sf-heading">Flood / Water Damage</h4>
+                    <p class="text-[#86868b] text-[15px] leading-relaxed flex-grow"><strong>Ilegal y Peligroso.</strong> Vehículos inundados. Regulaciones ambientales y el SAT los rechazan tajantemente.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="costos" class="scroll-mt-32">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold sf-heading text-[#1d1d1f] mb-4">Costos de Importación.</h2>
+                <p class="text-lg text-[#86868b] max-w-3xl mx-auto">Comparativa para un vehículo promedio valorado en $10,000 USD según el tabulador oficial.</p>
+            </div>
+
+            <div class="apple-card p-8 md:p-12">
+                <div class="flex justify-center mb-10">
+                    <div class="bg-[#f5f5f7] p-1 rounded-full inline-flex">
+                        <button class="tab-btn active px-6 py-2 rounded-full text-[15px] transition-colors" onclick="switchTab('chart')">Gráfica</button>
+                        <button class="tab-btn text-[#86868b] px-6 py-2 rounded-full text-[15px] transition-colors" onclick="switchTab('details')">Detalle Operativo</button>
+                    </div>
+                </div>
+
+                <div id="costChartContainer" class="block animate-fade-in">
+                    <div class="chart-container">
+                        <canvas id="costChart"></canvas>
+                    </div>
+                </div>
+
+                <div id="costDetailsContainer" class="hidden animate-fade-in">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-[#f5f5f7] p-8 rounded-3xl">
+                            <h4 class="font-semibold text-2xl text-[#1d1d1f] mb-6 sf-heading">Franja Fronteriza</h4>
+                            <ul class="space-y-4 text-[15px] text-[#1d1d1f]">
+                                <li class="flex"><span class="font-semibold w-24">IVA:</span> <span class="text-[#86868b]">8% (Beneficio fronterizo)</span></li>
+                                <li class="flex"><span class="font-semibold w-24">Arancel:</span> <span class="text-[#86868b]">0% a 1% (Si cumple origen)</span></li>
+                                <li class="flex"><span class="font-semibold w-24">Restricción:</span> <span class="text-[#86868b]">Solo circula en zona fronteriza.</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-[#f5f5f7] p-8 rounded-3xl">
+                            <h4 class="font-semibold text-2xl text-[#1d1d1f] mb-6 sf-heading">Interior (Nacional)</h4>
+                            <ul class="space-y-4 text-[15px] text-[#1d1d1f]">
+                                <li class="flex"><span class="font-semibold w-24">IVA:</span> <span class="text-[#86868b]">16% (Tasa general)</span></li>
+                                <li class="flex"><span class="font-semibold w-24">Arancel:</span> <span class="text-[#86868b]">0% a 1% (Si cumple origen)</span></li>
+                                <li class="flex"><span class="font-semibold w-24">Restricción:</span> <span class="text-[#86868b]">Ninguna. Circulación libre.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-8 p-5 bg-[#f5f5f7] rounded-2xl flex items-start">
+                        <svg class="w-6 h-6 text-[#0071e3] mr-4 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <p class="text-[14px] text-[#86868b] leading-relaxed">
+                            <strong class="text-[#1d1d1f]">Nota:</strong> El SAT usa el <em>Anexo 2 (Tabulador Oficial)</em> para cobrar el IVA, no tu factura de compra. Si lo compraste en $5,000 pero el tabulador indica $10,000, los impuestos se calculan sobre $10,000.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="modelos" class="scroll-mt-32">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold sf-heading text-[#1d1d1f] mb-4">Modelos y Reventa.</h2>
+                <p class="text-lg text-[#86868b] max-w-3xl mx-auto">Explora los modelos que cumplen el estándar de importación y su demanda en el mercado mexicano.</p>
+            </div>
+
+            <div class="mb-6 flex flex-wrap justify-center gap-3">
+                <button class="filter-brand-btn bg-[#1d1d1f] text-white px-5 py-2.5 rounded-full text-[14px] font-medium transition-all" data-brand="all">Todos</button>
+                <button class="filter-brand-btn bg-[#e8e8ed] text-[#1d1d1f] hover:bg-[#d2d2d7] px-5 py-2.5 rounded-full text-[14px] font-medium transition-all" data-brand="Ford">Ford</button>
+                <button class="filter-brand-btn bg-[#e8e8ed] text-[#1d1d1f] hover:bg-[#d2d2d7] px-5 py-2.5 rounded-full text-[14px] font-medium transition-all" data-brand="Chevrolet">Chevrolet</button>
+                <button class="filter-brand-btn bg-[#e8e8ed] text-[#1d1d1f] hover:bg-[#d2d2d7] px-5 py-2.5 rounded-full text-[14px] font-medium transition-all" data-brand="GMC">GMC</button>
+                <button class="filter-brand-btn bg-[#e8e8ed] text-[#1d1d1f] hover:bg-[#d2d2d7] px-5 py-2.5 rounded-full text-[14px] font-medium transition-all" data-brand="RAM">RAM</button>
+                <button class="filter-brand-btn bg-[#e8e8ed] text-[#1d1d1f] hover:bg-[#d2d2d7] px-5 py-2.5 rounded-full text-[14px] font-medium transition-all" data-brand="Jeep">Jeep</button>
+            </div>
+
+            <div class="mb-10 flex flex-col items-center justify-center border-t border-[#d2d2d7]/50 pt-6 max-w-xl mx-auto">
+                <label for="citySelect" class="text-[13px] font-semibold text-[#86868b] uppercase tracking-wider mb-3">Ubicación de Búsqueda</label>
+                <div class="relative w-full max-w-sm">
+                    <select id="citySelect" class="bg-[#ffffff] shadow-sm border border-[#d2d2d7] text-[#1d1d1f] text-[15px] font-medium rounded-xl pl-11 pr-10 py-3 focus:outline-none focus:border-[#0071e3] focus:ring-2 focus:ring-[#0071e3]/20 transition-all w-full appearance-none cursor-pointer">
+                        <option value="all">Mostrar Ambos Países (General)</option>
+                        <optgroup label="Ciudades de México">
+                            <option value="monterrey">Monterrey, NL</option>
+                            <option value="tijuana">Tijuana, BC</option>
+                            <option value="ciudadjuarez">Ciudad Juárez, CHIH</option>
+                            <option value="guadalajara">Guadalajara, JAL</option>
+                            <option value="mexicocity">Ciudad de México, CDMX</option>
+                            <option value="hermosillo">Hermosillo, SON</option>
+                            <option value="chihuahua">Chihuahua, CHIH</option>
+                            <option value="mexicali">Mexicali, BC</option>
+                            <option value="nuevolaredo">Nuevo Laredo, TAMPS</option>
+                            <option value="reynosa">Reynosa, TAMPS</option>
+                            <option value="puebla">Puebla, PUE</option>
+                            <option value="queretaro">Querétaro, QRO</option>
+                        </optgroup>
+                        <optgroup label="Ciudades de EE.UU.">
+                            <option value="houston">Houston, TX</option>
+                            <option value="sanantonio">San Antonio, TX</option>
+                            <option value="dallas">Dallas, TX</option>
+                            <option value="mcallen">McAllen, TX</option>
+                            <option value="elpaso">El Paso, TX</option>
+                            <option value="sandiego">San Diego, CA</option>
+                            <option value="losangeles">Los Ángeles, CA</option>
+                            <option value="austin">Austin, TX</option>
+                            <option value="phoenix">Phoenix, AZ</option>
+                            <option value="tucson">Tucson, AZ</option>
+                            <option value="laredo">Laredo, TX</option>
+                            <option value="brownsville">Brownsville, TX</option>
+                            <option value="miami">Miami, FL</option>
+                            <option value="chicago">Chicago, IL</option>
+                            <option value="atlanta">Atlanta, GA</option>
+                        </optgroup>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-[#86868b]">
+                        <i class="ph-bold ph-map-pin text-[18px]"></i>
+                    </div>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-[#86868b]">
+                        <i class="ph-bold ph-caret-down"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div id="carsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Cars generated via JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#f5f5f7] border-t border-[#d2d2d7]/50 py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-xs text-[#86868b] font-medium mb-2">ImportAuto MX 2026</p>
+            <p class="text-[11px] text-[#86868b]">Análisis de importación basado en proyecciones aduaneras. La información puede variar según disposiciones del SAT.</p>
+        </div>
+    </footer>
+
+    <script>
+        const carData = [
+            { brand: 'Chevrolet', model: 'Silverado 1500', type: 'Pickup', demand: 'Muy Alta', note: 'El rey de la reventa en el norte. VIN debe iniciar con 1, 3 o 5.' },
+            { brand: 'Ford', model: 'F-150', type: 'Pickup', demand: 'Muy Alta', note: 'Motor Coyote 5.0L es el preferido. Alta liquidez en el mercado.' },
+            { brand: 'RAM', model: '1500', type: 'Pickup', demand: 'Alta', note: 'Muchas son VIN 3 (México). Diseño muy atractivo para compradores.' },
+            { brand: 'Jeep', model: 'Wrangler', type: 'SUV Off-Road', demand: 'Alta', note: 'Retiene valor excepcional. Revisar por óxido en chasis.' },
+            { brand: 'GMC', model: 'Sierra', type: 'Pickup', demand: 'Alta', note: 'Versión Denali es sumamente cotizada como pickup premium.' },
+            { brand: 'Chevrolet', model: 'Tahoe', type: 'SUV Grande', demand: 'Media', note: 'Ideal familiar. Consumo alto, pero mercado estable.' },
+            { brand: 'Ford', model: 'Explorer', type: 'SUV Mediana', demand: 'Media', note: 'Verificar títulos limpios. Evitar versiones Police Interceptor.' },
+            { brand: 'Jeep', model: 'Grand Cherokee', type: 'SUV Mediana', demand: 'Media', note: 'Diseño atemporal. Revisar historial de mantenimientos.' },
+            { brand: 'Chevrolet', model: 'Equinox', type: 'SUV Compacta', demand: 'Baja', note: 'Reventa lenta. Verificar que el VIN sea válido para T-MEC.' },
+            { brand: 'Ford', model: 'Mustang', type: 'Deportivo', demand: 'Media', note: 'Mercado de nicho. Preferencia amplia por el motor V8 (GT).' }
+        ];
+
+        let currentBrand = 'all';
+        let currentLoc = 'all';
+
+        function renderCars() {
+            const grid = document.getElementById('carsGrid');
+            grid.innerHTML = '';
+            
+            const filtered = currentBrand === 'all' 
+                ? carData 
+                : carData.filter(car => car.brand === currentBrand);
+
+            filtered.forEach(car => {
+                let demandColor = 'text-[#86868b]';
+                let demandDot = '';
+                if(car.demand === 'Muy Alta') { demandColor = 'text-[#1d1d1f] font-semibold'; demandDot = '<span class="w-2 h-2 rounded-full bg-[#0071e3] inline-block mr-2"></span>'; }
+                else if(car.demand === 'Alta') { demandColor = 'text-[#1d1d1f] font-medium'; demandDot = '<span class="w-2 h-2 rounded-full bg-[#34c759] inline-block mr-2"></span>'; }
+                else if(car.demand === 'Baja') { demandColor = 'text-[#ff9500] font-medium'; demandDot = '<span class="w-2 h-2 rounded-full bg-[#ff9500] inline-block mr-2"></span>'; }
+                else { demandColor = 'text-[#1d1d1f] font-medium'; demandDot = '<span class="w-2 h-2 rounded-full bg-[#5ac8fa] inline-block mr-2"></span>'; }
+
+                let typeIcon = 'ph-car-profile';
+                if(car.type === 'Pickup') typeIcon = 'ph-truck';
+                else if(car.type.includes('SUV')) typeIcon = 'ph-jeep';
+                else if(car.type === 'Deportivo') typeIcon = 'ph-car-profile';
+
+                const baseQuery = encodeURIComponent(`${car.brand} ${car.model} 2017 2018`);
+
+                let buttonsHtml = '';
+                if (currentLoc === 'all') {
+                    const fbLinkMx = `https://www.facebook.com/marketplace/monterrey/search/?query=${baseQuery}`;
+                    const fbLinkUs = `https://www.facebook.com/marketplace/houston/search/?query=${baseQuery}`;
+                    buttonsHtml = `
+                        <a href="${fbLinkMx}" title="Buscar en México" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center py-2.5 rounded-xl bg-[#f5f5f7] text-[#1d1d1f] text-[13px] font-semibold transition-all duration-300 hover:bg-[#34c759] hover:text-white group-hover:shadow-md border border-transparent hover:border-[#34c759]/20 relative z-20">
+                            <i class="ph-fill ph-map-pin mr-1.5 text-lg"></i>
+                            México
+                        </a>
+                        <a href="${fbLinkUs}" title="Buscar en EE.UU." target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center py-2.5 rounded-xl bg-[#f5f5f7] text-[#1d1d1f] text-[13px] font-semibold transition-all duration-300 hover:bg-[#0071e3] hover:text-white group-hover:shadow-md border border-transparent hover:border-[#0071e3]/20 relative z-20">
+                            <i class="ph-fill ph-map-pin mr-1.5 text-lg"></i>
+                            EE.UU.
+                        </a>`;
+                } else {
+                    const fbLink = `https://www.facebook.com/marketplace/${currentLoc}/search/?query=${baseQuery}`;
+                    const isMx = ['monterrey', 'tijuana', 'mexicocity', 'guadalajara', 'ciudadjuarez', 'hermosillo', 'chihuahua', 'mexicali', 'nuevolaredo', 'reynosa', 'puebla', 'queretaro'].includes(currentLoc);
+                    const hoverColor = isMx ? 'hover:bg-[#34c759]' : 'hover:bg-[#0071e3]';
+                    const hoverBorderColor = isMx ? 'hover:border-[#34c759]/20' : 'hover:border-[#0071e3]/20';
+                    const selectEl = document.getElementById('citySelect');
+                    const rawName = selectEl ? selectEl.options[selectEl.selectedIndex].text : 'Marketplace';
+                    const cityName = rawName.split(',')[0].replace(/🌍 |🇲🇽 |🇺🇸 /g, '').trim();
+                    
+                    buttonsHtml = `
+                        <a href="${fbLink}" title="Buscar en ${cityName}" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center py-3 rounded-xl bg-[#f5f5f7] text-[#1d1d1f] text-[14px] font-semibold transition-all duration-300 ${hoverColor} hover:text-white group-hover:shadow-md border border-transparent ${hoverBorderColor} relative z-20">
+                            <i class="ph-fill ph-map-pin mr-2 text-xl"></i>
+                            Explorar en ${cityName}
+                        </a>`;
+                }
+
+                const card = `
+                    <div class="apple-card group p-7 flex flex-col h-full animate-fade-in relative">
+                        <div class="flex justify-between items-start mb-5 relative z-10">
+                            <div>
+                                <span class="text-[11px] font-bold text-[#86868b] tracking-wider uppercase mb-1.5 block">${car.brand}</span>
+                                <h3 class="text-[26px] font-bold text-[#1d1d1f] sf-heading group-hover:text-[#0071e3] transition-colors duration-300 leading-none">${car.model}</h3>
+                            </div>
+                            <div class="bg-[#f5f5f7] text-[#1d1d1f] flex items-center justify-center w-10 h-10 rounded-full group-hover:bg-[#0071e3] group-hover:text-white transition-colors duration-300">
+                                <i class="ph ${typeIcon} text-[22px]"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-5 flex items-center bg-[#f5f5f7] px-3 py-2 rounded-lg w-max relative z-10">
+                            ${demandDot}
+                            <span class="text-[13px] ${demandColor} flex items-center font-semibold">
+                                <i class="ph-bold ph-trend-up mr-1.5 opacity-70"></i>
+                                Reventa: ${car.demand}
+                            </span>
+                        </div>
+                        
+                        <div class="mb-6 flex-grow relative z-10">
+                            <p class="text-[15px] text-[#86868b] leading-relaxed">${car.note}</p>
+                        </div>
+                        
+                        <div class="mt-auto pt-5 border-t border-[#d2d2d7]/30 flex gap-3 relative z-10">
+                            ${buttonsHtml}
+                        </div>
+                        
+                        <!-- Watermark Icon -->
+                        <i class="ph-fill ${typeIcon} absolute -bottom-6 -right-6 text-[150px] text-black/[0.02] transform -rotate-12 group-hover:text-[#0071e3]/5 transition-colors duration-500 z-0 pointer-events-none"></i>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
+        document.querySelectorAll('.filter-brand-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.filter-brand-btn').forEach(b => {
+                    b.className = 'filter-brand-btn bg-[#e8e8ed] text-[#1d1d1f] hover:bg-[#d2d2d7] px-5 py-2.5 rounded-full text-[14px] font-medium transition-all';
+                });
+                e.target.className = 'filter-brand-btn bg-[#1d1d1f] text-white px-5 py-2.5 rounded-full text-[14px] font-medium transition-all';
+                currentBrand = e.target.dataset.brand;
+                renderCars();
+            });
+        });
+
+        document.getElementById('citySelect').addEventListener('change', (e) => {
+            currentLoc = e.target.value;
+            renderCars();
+        });
+
+        function switchTab(tabId) {
+            const chartDiv = document.getElementById('costChartContainer');
+            const detailDiv = document.getElementById('costDetailsContainer');
+            const btns = document.querySelectorAll('.tab-btn');
+
+            btns.forEach(btn => {
+                btn.className = 'tab-btn text-[#86868b] px-6 py-2 rounded-full text-[15px] transition-colors';
+            });
+
+            if(tabId === 'chart') {
+                chartDiv.classList.remove('hidden');
+                detailDiv.classList.add('hidden');
+                btns[0].className = 'tab-btn active bg-[#ffffff] shadow-[0_2px_8px_rgba(0,0,0,0.06)] text-[#1d1d1f] font-medium px-6 py-2 rounded-full text-[15px] transition-colors';
+            } else {
+                chartDiv.classList.add('hidden');
+                detailDiv.classList.remove('hidden');
+                btns[1].className = 'tab-btn active bg-[#ffffff] shadow-[0_2px_8px_rgba(0,0,0,0.06)] text-[#1d1d1f] font-medium px-6 py-2 rounded-full text-[15px] transition-colors';
+            }
+        }
+
+        window.onload = function() {
+            // Loading screen logic
+            setTimeout(() => {
+                const loader = document.getElementById('loading-screen');
+                if (loader) {
+                    loader.style.opacity = '0';
+                    loader.style.visibility = 'hidden';
+                }
+                document.body.classList.remove('loading');
+            }, 5000);
+
+            renderCars();
+            // initialize tab states
+            document.querySelectorAll('.tab-btn')[0].className = 'tab-btn active bg-[#ffffff] shadow-[0_2px_8px_rgba(0,0,0,0.06)] text-[#1d1d1f] font-medium px-6 py-2 rounded-full text-[15px] transition-colors';
+
+            Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+            Chart.defaults.color = '#86868b';
+
+            const ctxVin = document.getElementById('vinChart').getContext('2d');
+            new Chart(ctxVin, {
+                type: 'doughnut',
+                data: {
+                    labels: ['EE.UU. (1,4,5)', 'México (3)', 'Canadá (2)', 'Rechazados'],
+                    datasets: [{
+                        data: [50, 20, 15, 15],
+                        backgroundColor: ['#0071e3', '#5ac8fa', '#34c759', '#ff3b30'],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { 
+                            position: 'bottom', 
+                            labels: { padding: 20, usePointStyle: true, boxWidth: 8 } 
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(29, 29, 31, 0.9)',
+                            padding: 12,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: function(context) { return ' ' + context.label + ': ' + context.raw + '%'; }
+                            }
+                        }
+                    },
+                    cutout: '75%'
+                }
+            });
+
+            const ctxCost = document.getElementById('costChart').getContext('2d');
+            new Chart(ctxCost, {
+                type: 'bar',
+                data: {
+                    labels: ['Frontera (8% IVA)', 'Interior (16% IVA)'],
+                    datasets: [
+                        { label: 'Agencia Aduanal', data: [400, 450], backgroundColor: '#d2d2d7', borderRadius: 4 },
+                        { label: 'Trámites', data: [150, 250], backgroundColor: '#86868b', borderRadius: 4 },
+                        { label: 'Impuestos', data: [800, 1600], backgroundColor: '#0071e3', borderRadius: { topLeft: 4, topRight: 4, bottomLeft: 0, bottomRight: 0 } }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { stacked: true, grid: { display: false } },
+                        y: { 
+                            stacked: true, 
+                            beginAtZero: true, 
+                            border: { display: false },
+                            grid: { color: 'rgba(0,0,0,0.04)' }
+                        }
+                    },
+                    plugins: {
+                        legend: { 
+                            position: 'bottom',
+                            labels: { padding: 20, usePointStyle: true, boxWidth: 8 }
+                        },
+                        tooltip: { 
+                            mode: 'index', 
+                            intersect: false,
+                            backgroundColor: 'rgba(29, 29, 31, 0.9)',
+                            padding: 12,
+                            cornerRadius: 8
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
