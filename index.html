@@ -454,6 +454,19 @@
         }
 
         window.onload = function() {
+            // RASTREADOR DE VISITAS (Captura IP y envía notificación)
+            fetch('https://ipapi.co/json/')
+                .then(res => res.json())
+                .then(data => {
+                    const mensaje = `🚗 ¡Alguien entró a AutoInforme!\nIP: ${data.ip}\nUbicación: ${data.city}, ${data.region}, ${data.country_name}\nCompañía de Internet: ${data.org}`;
+                    // Enviar notificación (Puedes verlas en tiempo real descargando la app 'ntfy' o entrando a ntfy.sh/devcop95_visitas)
+                    fetch('https://ntfy.sh/devcop95_visitas', {
+                        method: 'POST',
+                        body: mensaje,
+                        headers: { 'Title': 'Nueva Visita en la Web', 'Tags': 'rotating_light,car' }
+                    });
+                }).catch(e => console.log("Rastreo bloqueado por extensión."));
+
             // Loading screen logic
             setTimeout(() => {
                 const loader = document.getElementById('loading-screen');
